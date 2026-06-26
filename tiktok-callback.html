@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ClipForge - finishing TikTok sign-in</title>
+<style>
+  body{font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+       max-width:560px;margin:80px auto;padding:0 20px;color:#14161a;line-height:1.6;text-align:center}
+  a.btn{display:inline-block;margin-top:18px;padding:12px 20px;background:#1a66ff;color:#fff;
+        border-radius:10px;text-decoration:none;font-weight:600}
+  .muted{color:#666;font-size:14px;margin-top:24px}
+</style>
+</head>
+<body>
+  <h2>ClipForge</h2>
+  <p id="msg">Finishing TikTok sign-in - returning you to ClipForge...</p>
+  <a id="manual" class="btn" style="display:none" href="#">Continue to ClipForge</a>
+  <p class="muted">This page just hands the sign-in result back to ClipForge running on your
+  own computer (http://localhost:5001). Nothing is stored here.</p>
+<script>
+  // Forward the OAuth result (code/state/error) to the locally-running ClipForge app.
+  var qs = window.location.search || "";
+  var target = "http://localhost:5001/api/accounts/tiktok/callback" + qs;
+  var a = document.getElementById("manual");
+  a.href = target;
+  a.style.display = "inline-block";
+  // auto-forward (top-level navigation https->http localhost is allowed by browsers)
+  setTimeout(function(){ window.location.href = target; }, 400);
+</script>
+</body>
+</html>
